@@ -110,6 +110,42 @@ def most_active_temps():
     
     return jsonify(most_active_temps)
 
+@app.route("/api/v1.0/<start>")
+def timestart(start):
+    start_time = start
+    
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Returns min, max, and averages from the specified start date to the latest date in the data set
+
+    results = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
+        filter(Measurement.date >= start_time).\
+        group_by(Measurement.date).all()
+ 
+    session.close()
+    
+    timerange_list = list(np.ravel(results))
+    return jsonify(timerange_list)
+
+@app.route("/api/v1.0/<start>/<end>/")
+def timerange(start, end):
+    start_time = start
+    end_time = end
+    
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Returns min, max, and averages for the range specified by start and end dates
+
+    results = session.query(Measurement.date, func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)).\
+        filter(Measurement.date >= start_time).filter(Measurement.date <= end_time).\
+        group_by(Measurement.date).all()
+   
+    session.close()
+    
+    timerange_list = list(np.ravel(results))
+    return jsonify(timerange_list)
 
 if __name__ == '__main__':
     app.run(debug=True)
