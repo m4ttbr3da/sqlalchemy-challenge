@@ -4,7 +4,7 @@
 
 ## Step 1 - Climate Analysis and Exploration
 
-To begin, I used Python and SQLAlchemy to do basic climate analysis and data exploration of your climate database. All of the following analysis was completed using SQLAlchemy ORM queries, Pandas, and Matplotlib.
+To begin, I used Python and SQLAlchemy to do basic climate analysis and data exploration of a sample climate database. All of the following analysis was completed using SQLAlchemy ORM queries, Pandas, and Matplotlib.
 
 * Used the provided [starter notebook](climate_starter.ipynb) and [hawaii.sqlite](Resources/hawaii.sqlite) files to complete your climate analysis and data exploration.
 
